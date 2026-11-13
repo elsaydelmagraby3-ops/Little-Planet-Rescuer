@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071426">
+  <meta name="description" content="Little Planet Rescuer — an interactive journey through the Solar System.">
+  <title>Little Planet Rescuer | Space Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js" defer></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <div class="starfield" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Little Planet Rescuer home">
+      <span class="brand-mark"></span>
+      <span>LITTLE <b>PLANET</b> RESCUER</span>
+    </a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <button class="nav-link active" data-section="home">Home</button>
+      <button class="nav-link" data-section="story">Story mode</button>
+      <button class="nav-link" data-section="universe">Solar system</button>
+      <button class="nav-link" data-section="games">Mini games</button>
+      <button class="nav-link" data-section="missions">Missions</button>
+    </nav>
+    <div class="top-actions">
+      <button class="icon-btn" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound">♫</button>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">☰</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-section hero-section active" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse-dot"></span> YOUR SPACE ADVENTURE STARTS HERE</div>
+        <h1>One small robot.<br><span>One giant mission.</span></h1>
+        <p class="hero-description">Travel across the Solar System with Najm, solve cosmic challenges, and discover the real science behind our amazing planets.</p>
+        <div class="hero-actions">
+          <button class="primary-btn" data-go="story">Start the adventure <span>↗</span></button>
+          <button class="secondary-btn" data-go="universe">Explore the planets</button>
+        </div>
+        <div class="hero-facts">
+          <div><strong>8</strong><span>Planets to explore</span></div>
+          <div><strong>7+</strong><span>Science missions</span></div>
+          <div><strong>∞</strong><span>Things to discover</span></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="hero-planet planet-large"></div>
+        <div class="hero-planet planet-small"></div>
+        <div class="robot" aria-label="Najm the friendly space robot">
+          <div class="antenna"><i></i></div>
+          <div class="robot-head"><div class="robot-ear left"></div><div class="robot-ear right"></div><div class="robot-screen"><i></i><i></i><span></span></div></div>
+          <div class="robot-body"><span class="robot-core"></span></div>
+          <div class="robot-arm arm-left"></div><div class="robot-arm arm-right"></div>
+          <div class="robot-leg leg-left"></div><div class="robot-leg leg-right"></div>
+        </div>
+        <div class="floating-label label-top">HELLO, EXPLORER! <span></span></div>
+        <div class="floating-label label-bottom"><span class="tiny-star">✧</span> Let's discover the universe</div>
+      </div>
+      <div class="scroll-hint">SCROLL TO EXPLORE <span>↓</span></div>
+    </section>
+
+    <section class="page-section story-section" id="story">
+      <div class="section-heading">
+        <div class="eyebrow">CHAPTER 01 · THE MYSTERIOUS SIGNAL</div>
+        <h2>The adventure <span>begins.</span></h2>
+        <p>Every choice shapes your journey. Read the story, make a decision, and help Najm investigate the Solar System.</p>
+      </div>
+      <div class="story-layout">
+        <div class="story-visual">
+          <div class="story-scene"><div class="scene-planet"></div><div class="scene-stars"></div><div class="scene-robot">🤖</div><div class="signal-ring"></div></div>
+          <div class="chapter-progress"><div><span>YOUR JOURNEY</span><b id="chapter-label">CHAPTER 1 OF 4</b></div><div class="progress-track"><i id="story-progress"></i></div></div>
+        </div>
+        <article class="story-card">
+          <div class="story-card-top"><span class="story-tag">MISSION LOG</span><span class="log-time">08:42 UTC</span></div>
+          <h3 id="story-title">A signal from deep space</h3>
+          <p id="story-text">Najm is a curious little robot aboard the explorer ship Horizon. One quiet evening, a mysterious signal appears on the ship's screen. It seems to be coming from somewhere in our Solar System.</p>
+          <div class="story-question" id="story-question">Where should Najm investigate first?</div>
+          <div class="choice-list" id="story-choices">
+            <button class="choice-btn" data-choice="mars"><span class="choice-icon mars-dot"></span><span><b>Travel to Mars</b><small>Investigate clues about ancient water.</small></span><i>↗</i></button>
+            <button class="choice-btn" data-choice="saturn"><span class="choice-icon saturn-dot"></span><span><b>Visit Saturn</b><small>Study its spectacular ring system.</small></span><i>↗</i></button>
+          </div>
+          <div class="story-footer"><span id="story-feedback">Choose a destination to continue.</span><button class="text-btn" id="restart-story">Restart story ↺</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="page-section universe-section" id="universe">
+      <div class="section-heading">
+        <div class="eyebrow">A NEIGHBORHOOD OF WONDERS</div>
+        <h2>Explore our <span>Solar System.</span></h2>
+        <p>Select a planet to discover fascinating facts. Drag to rotate the 3D scene and scroll to zoom.</p>
+      </div>
+      <div class="universe-layout">
+        <div class="universe-canvas-wrap">
+          <div id="solar-canvas" role="img" aria-label="Interactive 3D Solar System"></div>
+          <div class="canvas-hint"><span>✥</span> DRAG TO ROTATE · SCROLL TO ZOOM</div>
+          <div class="canvas-controls"><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="reset-camera" aria-label="Reset view">◎</button></div>
+        </div>
+        <aside class="planet-panel">
+          <div class="planet-panel-top"><span class="story-tag">PLANET DATABASE</span><span class="live-dot">● LIVE</span></div>
+          <div class="planet-preview" id="planet-preview"><div class="preview-orb mars-orb"></div></div>
+          <div class="planet-info">
+            <span class="planet-order" id="planet-order">PLANET 04 · TERRESTRIAL</span>
+            <h3 id="planet-name">Mars</h3>
+            <p id="planet-description">Mars is a cold desert world with a thin atmosphere. Its surface shows signs that liquid water flowed there in the distant past.</p>
+            <div class="planet-stats">
+              <div><span>TYPE</span><b id="planet-type">Terrestrial</b></div>
+              <div><span>DAY LENGTH</span><b id="planet-day">24.6 hours</b></div>
+              <div><span>MOONS</span><b id="planet-moons">2</b></div>
+            </div>
+            <button class="primary-btn full-btn" id="planet-mission">View planet mission ↗</button>
+          </div>
+        </aside>
+      </div>
+      <div class="planet-selector" id="planet-selector" aria-label="Choose a planet"></div>
+    </section>
+
+    <section class="page-section games-section" id="games">
+      <div class="section-heading">
+        <div class="eyebrow">LEARN BY PLAYING</div>
+        <h2>Training <span>simulations.</span></h2>
+        <p>Complete short challenges to sharpen your explorer skills.</p>
+      </div>
+      <div class="games-grid">
+        <article class="game-card repair-card">
+          <div class="game-art repair-art"><div class="gear gear-one">⚙</div><div class="gear gear-two">⚙</div><div class="repair-box">＋</div></div>
+          <div class="game-content"><span class="game-level">PUZZLE · BEGINNER</span><h3>Repair the ship</h3><p>Choose the correct energy source to get Horizon ready for launch.</p><button class="secondary-btn game-open" data-game="repair">Play simulation ↗</button></div>
+        </article>
+        <article class="game-card telescope-card">
+          <div class="game-art telescope-art"><div class="telescope">◉</div><div class="target-star"></div><div class="target-ring"></div></div>
+          <div class="game-content"><span class="game-level">OBSERVATION · BEGINNER</span><h3>Find the hidden planet</h3><p>Move your pointer around the star field and locate the hidden planet.</p><button class="secondary-btn game-open" data-game="telescope">Play simulation ↗</button></div>
+        </article>
+        <article class="game-card quiz-card">
+          <div class="game-art quiz-art"><div class="quiz-orbit">?</div><div class="quiz-star"></div></div>
+          <div class="game-content"><span class="game-level">KNOWLEDGE · BEGINNER</span><h3>Cosmic quiz</h3><p>Test what you learned about the planets in a quick science quiz.</p><button class="secondary-btn game-open" data-game="quiz">Play challenge ↗</button></div>
+        </article>
+      </div>
+      <div class="game-stage hidden" id="game-stage">
+        <div class="game-stage-header"><div><span class="eyebrow">SIMULATION RUNNING</span><h3 id="game-title">Repair the ship</h3></div><button class="icon-btn" id="close-game" aria-label="Close game">×</button></div>
+        <div id="game-content" class="game-stage-content"></div>
+      </div>
+    </section>
+
+    <section class="page-section missions-section" id="missions">
+      <div class="section-heading">
+        <div class="eyebrow">MISSION CONTROL</div>
+        <h2>Your explorer <span>record.</span></h2>
+        <p>Track your discoveries and celebrate every new thing you learn.</p>
+      </div>
+      <div class="mission-dashboard">
+        <div class="score-card"><span class="metric-label">EXPLORER POINTS</span><strong id="points-total">000</strong><small>Earn points by completing challenges</small><div class="score-decoration"></div></div>
+        <div class="mission-stat"><span class="metric-icon">◎</span><strong id="planets-count">0 / 8</strong><span>Planets discovered</span></div>
+        <div class="mission-stat"><span class="metric-icon">✓</span><strong id="games-count">0 / 3</strong><span>Simulations completed</span></div>
+      </div>
+      <div class="achievement-area"><div class="achievement-heading"><h3>Mission achievements</h3><span id="achievement-count">0 unlocked</span></div><div class="achievement-grid" id="achievement-grid"></div></div>
+      <div class="science-note"><span>ⓘ</span><p><b>Science note:</b> This is an educational story. The missions are fictional challenges inspired by real planetary science. Planets do not literally need rescuing.</p></div>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark"></span><span>LITTLE <b>PLANET</b> RESCUER</span></a><span>MADE FOR CURIOUS MINDS · EXPLORE. LEARN. DISCOVER.</span><a href="#home" class="back-top">BACK TO TOP ↑</a></footer>
+
+  <div class="modal-backdrop hidden" id="modal-backdrop">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+      <div class="modal-symbol" id="modal-symbol"></div>
+      <span class="eyebrow" id="modal-eyebrow">MISSION BRIEFING</span>
+      <h3 id="modal-title">Mission unlocked</h3>
+      <p id="modal-text"></p>
+      <button class="primary-btn" id="modal-action">Continue <span>↗</span></button>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
